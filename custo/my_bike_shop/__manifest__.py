@@ -3,7 +3,7 @@
     'summary': "Module de gestion pour un magasin de vélos",
     'description': "Gestion de vélos et locations",
     'author': "Yazbeck John et Jose Bigoro",
-    'website': "https://github.com/johnyazbeck/custom_addons",
+    'website': "https://github.com/sambiig/ERP-Project",
     'category': 'Sales',
     'version': '0.1',
     'depends': [
