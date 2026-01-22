@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ========== CLIENTS DE DÉMONSTRATION ========== -->
+        
+        <record id="demo_customer_1" model="res.partner">
+            <field name="name">Jean Dupont</field>
+            <field name="email">jean.dupont@example.com</field>
+            <field name="phone">+32 2 123 45 67</field>
+            <field name="street">Rue de la Loi 123</field>
+            <field name="city">Bruxelles</field>
+            <field name="zip">1000</field>
+            <field name="country_id" ref="base.be"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="demo_customer_2" model="res.partner">
+            <field name="name">Marie Martin</field>
+            <field name="email">marie.martin@example.com</field>
+            <field name="phone">+32 2 234 56 78</field>
+            <field name="street">Avenue Louise 456</field>
+            <field name="city">Bruxelles</field>
+            <field name="zip">1050</field>
+            <field name="country_id" ref="base.be"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <record id="demo_customer_3" model="res.partner">
+            <field name="name">Pierre Lambert</field>
+            <field name="email">pierre.lambert@example.com</field>
+            <field name="phone">+32 2 345 67 89</field>
+            <field name="street">Boulevard Anspach 789</field>
+            <field name="city">Bruxelles</field>
+            <field name="zip">1000</field>
+            <field name="country_id" ref="base.be"/>
+            <field name="customer_rank">1</field>
+        </record>
+
+        <!-- ========== VÉLOS DE DÉMONSTRATION ========== -->
+
+        <record id="demo_bike_mountain_1" model="product.template">
+            <field name="name">VTT Trek X-Caliber 8</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">bike</field>
+            <field name="brand">Trek</field>
+            <field name="model_name">X-Caliber 8</field>
+            <field name="size">m</field>
+            <field name="color">Bleu</field>
+            <field name="list_price">1299.00</field>
+            <field name="rental_price_hour">8.00</field>
+            <field name="rental_price_day">40.00</field>
+            <field name="rental_price_week">200.00</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <record id="demo_bike_road_1" model="product.template">
+            <field name="name">Vélo de route Giant TCR Advanced</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">bike</field>
+            <field name="brand">Giant</field>
+            <field name="model_name">TCR Advanced</field>
+            <field name="size">l</field>
+            <field name="color">Rouge</field>
+            <field name="list_price">2499.00</field>
+            <field name="rental_price_hour">12.00</field>
+            <field name="rental_price_day">60.00</field>
+            <field name="rental_price_week">350.00</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <record id="demo_bike_city_1" model="product.template">
+            <field name="name">Vélo de ville Gazelle CityZen C7</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">bike</field>
+            <field name="brand">Gazelle</field>
+            <field name="model_name">CityZen C7</field>
+            <field name="size">m</field>
+            <field name="color">Noir</field>
+            <field name="list_price">899.00</field>
+            <field name="rental_price_hour">5.00</field>
+            <field name="rental_price_day">25.00</field>
+            <field name="rental_price_week">120.00</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <record id="demo_bike_electric_1" model="product.template">
+            <field name="name">VAE Specialized Turbo Vado</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">bike</field>
+            <field name="brand">Specialized</field>
+            <field name="model_name">Turbo Vado</field>
+            <field name="size">l</field>
+            <field name="color">Gris</field>
+            <field name="list_price">3299.00</field>
+            <field name="rental_price_hour">15.00</field>
+            <field name="rental_price_day">80.00</field>
+            <field name="rental_price_week">450.00</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <!-- ========== PIÈCES ET ACCESSOIRES ========== -->
+
+        <record id="demo_part_chain" model="product.template">
+            <field name="name">Chaîne Shimano XT</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">part</field>
+            <field name="brand">Shimano</field>
+            <field name="list_price">29.90</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <record id="demo_part_tire" model="product.template">
+            <field name="name">Pneu Continental Grand Prix 5000</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">part</field>
+            <field name="brand">Continental</field>
+            <field name="list_price">59.90</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <record id="demo_accessory_helmet" model="product.template">
+            <field name="name">Casque Giro Synthe MIPS</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">accessory</field>
+            <field name="brand">Giro</field>
+            <field name="list_price">249.00</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <record id="demo_accessory_lock" model="product.template">
+            <field name="name">Antivol U Kryptonite Evolution</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">accessory</field>
+            <field name="brand">Kryptonite</field>
+            <field name="list_price">79.90</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <record id="demo_accessory_lights" model="product.template">
+            <field name="name">Kit éclairage LED avant/arrière</field>
+            <field name="is_bike_shop_item">True</field>
+            <field name="product_type">accessory</field>
+            <field name="brand">Lezyne</field>
+            <field name="list_price">49.90</field>
+            <field name="type">consu</field>
+            
+        </record>
+
+        <!-- ========== STOCK INITIAL ========== -->
+        <!-- Note: vous devrez adapter ces quantités selon votre configuration d'entrepôt -->
+
+    </data>
+</odoo>

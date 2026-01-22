@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- ========== MENU PRINCIPAL ========== -->
+
+    <!-- Menu principal "Gestion" -->
+    <menuitem id="menu_gestion" name="Gestion" sequence="10"/>
+
+    <!-- Sous-menus -->
+    <menuitem id="menu_vente" name="Vente de vélos et accessoires" parent="menu_gestion" sequence="20"/>
+    <menuitem id="menu_location" name="Location de vélos" parent="menu_gestion" sequence="30"/>
+    <menuitem id="menu_gestion_location" name="Gestion des locations et clients" parent="menu_gestion" sequence="40"/>
+
+    <!-- ========================================================= -->
+    <!--        VUES PRODUITS (PRODUCT.TEMPLATE)                   -->
+    <!-- ========================================================= -->
+
+    <!-- Liste des produits du Bike Shop (vélos, pièces, accessoires) -->
+    <record id="view_bike_shop_product_tree" model="ir.ui.view">
+      <field name="name">bike.shop.product.tree</field>
+      <field name="model">product.template</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="product_type"/>
+          <field name="brand"/>
+          <field name="model_name"/>
+          <field name="list_price" string="Prix de vente"/>
+          <field name="rental_price_day" string="Location / jour"/>
+          <field name="qty_available" string="Qté dispo"/>
+          <field name="stock_status"/>
+        </list>
+      </field>
+    </record>
+
+    <!-- Formulaire produit Bike Shop -->
+
+
+<!-- Formulaire produit Bike Shop : on étend le formulaire produit standard -->
+<record id="view_bike_shop_product_form" model="ir.ui.view">
+  <field name="name">bike.shop.product.form</field>
+  <field name="model">product.template</field>
+  <!-- cible la vue générique du produit -->
+  <field name="inherit_id" ref="product.product_template_form_view"/>
+  <field name="arch" type="xml">
+
+    <!-- Ajoute un onglet complet, 100% fiable -->
+    <xpath expr="//sheet/notebook" position="inside">
+      <page string="Bike Shop">
+        <group string="Informations produit">
+          <field name="is_bike_shop_item"/>
+          <field name="product_type"/>
+          <field name="brand"/>
+          <field name="model_name"/>
+          <field name="size"/>
+          <field name="color"/>
+        </group>
+        <group string="Tarifs location">
+          <field name="rental_price_hour" string="Prix loc. / heure"/>
+          <field name="rental_price_day" string="Prix loc. / jour"/>
+          <field name="rental_price_week" string="Prix loc. / semaine"/>
+        </group>
+      </page>
+    </xpath>
+
+  </field>
+</record>
+
+
+
+    <!-- Action pour afficher uniquement les produits du Bike Shop -->
+    <record id="action_bike_shop_product" model="ir.actions.act_window">
+      <field name="name">Vélos et Accessoires</field>
+      <field name="res_model">product.template</field>
+      <field name="view_mode">list,form</field>
+      <field name="domain">[('is_bike_shop_item','=',True)]</field>
+      <field name="context">{'default_is_bike_shop_item': True}</field>
+      <field name="view_id" ref="view_bike_shop_product_tree"/>
+    </record>
+
+    <!-- Menu "Produits en vente" -->
+    <menuitem id="menu_vente_products"
+              name="Produits"
+              parent="menu_vente"
+              action="action_bike_shop_product"
+              sequence="10"/>
+
+    <!-- ========================================================= -->
+    <!--                 VUES LOCATION (BIKE.SHOP.RENTAL)          -->
+    <!-- ========================================================= -->
+
+    <!-- Liste des locations -->
+    <record id="view_bike_shop_rental_tree" model="ir.ui.view">
+      <field name="name">bike.shop.rental.tree</field>
+      <field name="model">bike.shop.rental</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="bike_id"/>
+          <field name="customer_id"/>
+          <field name="start_date"/>
+          <field name="end_date"/>
+          <field name="rental_type"/>
+          <field name="total_price"/>
+          <field name="state"/>
+        </list>
+      </field>
+    </record>
+
+    <!-- Formulaire de location -->
+    <record id="view_bike_shop_rental_form" model="ir.ui.view">
+      <field name="name">bike.shop.rental.form</field>
+      <field name="model">bike.shop.rental</field>
+      <field name="arch" type="xml">
+        <form string="Location de vélo">
+          <sheet>
+            <header>
+              <button name="action_confirm" type="object" string="Confirmer"/>
+              <button name="action_start" type="object" string="Démarrer"/>
+              <button name="action_return" type="object" string="Retour"/>
+              <button name="action_invoice" type="object" string="Facturer"/>
+              <button name="action_cancel" type="object" string="Annuler"/>
+              <field name="state" widget="statusbar"/>
+            </header>
+
+            <group>
+              <group string="Informations location">
+                <field name="name" readonly="1"/>
+                <field name="bike_id"/>
+                <field name="customer_id"/>
+                <field name="rental_type"/>
+              </group>
+              <group string="Période et tarif">
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="rental_duration" readonly="1"/>
+                <field name="unit_price"/>
+                <field name="total_price" readonly="1"/>
+              </group>
+            </group>
+            <group string="Notes">
+              <field name="notes" nolabel="1"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action liste/form pour les locations -->
+    <record id="action_bike_shop_rental" model="ir.actions.act_window">
+      <field name="name">Locations</field>
+      <field name="res_model">bike.shop.rental</field>
+      <field name="view_mode">list,form</field>
+      <field name="view_id" ref="view_bike_shop_rental_tree"/>
+    </record>
+
+    <!-- Menu "Gestion des locations" -->
+    <menuitem id="menu_location_management"
+              name="Gestion des locations"
+              parent="menu_location"
+              action="action_bike_shop_rental"
+              sequence="10"/>
+
+    <!-- ========================================================= -->
+    <!--                     CLIENTS (RES.PARTNER)                 -->
+    <!-- ========================================================= -->
+
+    <!-- Action Clients (standard Odoo, filtré clients) -->
+    <record id="action_bike_shop_customer" model="ir.actions.act_window">
+      <field name="name">Clients</field>
+      <field name="res_model">res.partner</field>
+      <field name="view_mode">list,form</field>
+      <field name="domain">[('customer_rank', '&gt;', 0)]</field>
+      <field name="context">{'default_customer_rank': 1}</field>
+    </record>
+
+    <!-- Menus Gestion des locations & clients -->
+    <menuitem id="menu_gestion_clients"
+              name="Liste des clients"
+              parent="menu_gestion_location"
+              action="action_bike_shop_customer"
+              sequence="10"/>
+
+    <menuitem id="menu_gestion_locations"
+              name="Toutes les locations"
+              parent="menu_gestion_location"
+              action="action_bike_shop_rental"
+              sequence="20"/>
+
+  </data>
+</odoo>

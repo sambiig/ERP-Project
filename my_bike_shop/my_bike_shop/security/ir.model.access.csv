@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bike_shop_rental_user,bike.shop.rental.user,model_bike_shop_rental,base.group_user,1,1,1,0
+access_bike_shop_rental_manager,bike.shop.rental.manager,model_bike_shop_rental,sales_team.group_sale_manager,1,1,1,1
+access_bike_shop_rental_sale_user,bike.shop.rental.sale.user,model_bike_shop_rental,sales_team.group_sale_salesman,1,1,1,0
+access_bike_shop_rental_public,bike.shop.rental.public,model_bike_shop_rental,base.group_public,1,0,0,0
+access_product_template_bike_user,product.template.bike.user,product.model_product_template,base.group_user,1,1,1,0
+access_product_template_bike_manager,product.template.bike.manager,product.model_product_template,sales_team.group_sale_manager,1,1,1,1
